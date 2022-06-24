@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registeration Page!</title>
+
+
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+  <style>
+    body {
+      background-image: url({{url_for( 'static', filename='img/hero.jpg') }})
+    }
+    </style>
+</head>
+
+<body>
+
+  <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+  <h1></h1>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+</body>
+
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you ne/ed
+  // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+  // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAowEZaWbwVT9SE6swCQjq60C2VbNwUH3Y",
+    authDomain: "mihirbhai-1f8ce.firebaseapp.com",
+    projectId: "mihirbhai-1f8ce",
+    storageBucket: "mihirbhai-1f8ce.appspot.com",
+    messagingSenderId: "117772341701",
+    appId: "1:117772341701:web:bcba8a45986151d24c7bac",
+    measurementId: "G-ENM44VKK8Y"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig)
+  // const analytics = getAnalytics(app);
+
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  var uiConfig = {
+    defaultCountry: 'CA',
+    callbacks: {
+      signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+        console.log(authResult)
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(async function (idToken) {
+          // Send token to your backend via HTTPS
+          // ...
+          var formdata = new FormData();
+          formdata.append("authentication_key", idToken)
+          var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+          };
+          let page=await fetch('/token', requestOptions).then(response=>response.json())
+          let url=`http://${window.location.host}/${page.url}`
+          window.location.href=url
+          console.log(idToken)
+          console.log(page.url)
+        }).catch(function (error) {
+          // Handle error
+        });// User successfully signed in.
+        // Return type determines whether we continue the redirect automatically
+        // or whether we leave that to developer to handle.
+        return false;
+
+      },
+      uiShown: function () {
+        // The widget is rendered.
+        // Hide the loader.
+        
+        document.getElementById('loader').style.display = 'none';
+      }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    
+    signInFlow: 'popup',
+    signInSuccessUrl: '/index',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      // firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+      
+
+    ],
+    // Terms of service url.
+    tosUrl: '<your-tos-url>',
+    // Privacy policy url.
+    privacyPolicyUrl: '<your-privacy-policy-url>'
+    
+  };
+  //     ui.start('#firebaseui-auth-container', {
+  //   signInOptions: [
+  //     firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  //   ],
+  //   // Other config options...
+  // });
+  // The start method will wait until the DOM is loaded.
+  ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+</html>

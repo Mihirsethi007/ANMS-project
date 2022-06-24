@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="//form.css">
+
+  <title>Registeration Form</title>
+  <style>
+    body {
+      padding: 25px;
+    }
+
+    div {
+      margin: 2px;
+    }
+  </style>
+</head>
+<!-- <style>
+    * {
+        font-family: system-ui;
+        margin: 0;
+    }
+    /* form  { display: table;      }
+    section{display: table-rows;}
+    label { display: table-cell; }
+input { display: table-cell; } */
+
+</style> -->
+
+<body>
+  <form action="/api" method="post">
+    <div class="div-cover">
+      <div class="card" style="width: 100%;">
+        <section>
+          <div class="card-body">
+            <h3 class="card-title">Personal Information:</h3>
+
+            <div class="row m-0">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="fname">First Name: </label>
+                  <input type="text" id="fname" name="fname" class="form-control form-control-md">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="mname">Middle Name: </label>
+                  <input type="text" id="mname" name="mname" class="form-control form-control-md">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="lname">Last Name: </label>
+                  <input type="text" id="lname" name="lname" class="form-control form-control-md">
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="address">Address: </label>
+                  <textarea id="address" name="address" class="form-control" style="height: 70px;"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="email" style="margin-right:auto">Email: </label>
+                  <input type="text" id="email" name="email" class="form-control form-control-md">
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="contact" style="margin-right:auto">Contact: </label>
+                  <input type="tel" id="contact" name="contact" class="form-control form-control-md"
+                    style="margin-left:auto">
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="dateOfBirth" style="margin-right:auto">Date Of Birth: </label>
+                  <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control form-control-md"
+                    style="margin-right:auto">
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="gender" style="margin-right:auto">Gender: </label>
+                  <select id="gender" name="gender" class="form-control form-control-md"
+                    style="background: white; margin-right:auto">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Non-binary</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="lang" style="margin-right:auto">Preferable Language: </label>
+                  <select id="lang" name="lang" class="form-control form-control-md"
+                    style="background: white; margin-right:auto">
+                    <option>English</option>
+                    <option>French</option>
+                    <option>Spanish</option>
+                    <option>Vietnamese</option>
+                    <option>Mandarin</option>
+                    <option>Cantonese</option>
+                    <option>Filipino</option>
+                    <option>Telugu</option>
+                    <option>Hindi</option>
+                    <option>Punjabi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <div class="card" style="width: 100%; margin-top: 10px;">
+        <section>
+          <div class="card-body">
+            <h3 class="card-title">Work Profile:</h3>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="previousEmployer">Name of previous employer:</label>
+                  <input type="text" id="previousEmployer" name="previousEmployer"
+                    class="form-control form-control-md form-inline">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="yearsOfJob">Years Of Work: </label>
+                  <input type="text" id="yearsOfJob" name="yearsOfJob" class="form-control form-control-md">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="jobAddress">Address: </label>
+                  <textarea type="text" id="jobAddress" name="jobAddress"
+                    class="form-control form-control-md">   </textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-4">
+                <div class="form-inline">
+                  <label for="jobNature">Job Nature: </label>
+                  <input type="text" id="jobNature" name="jobNature" class="form-control form-control-md">
+                </div>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h4 class="card-title">Job candidate is looking for:</h4>
+
+              <div class="row m-0">
+                <div class="col-4 form-inline">
+                  <div class="form-inline">
+                    <label for="typeGeneral">General Labour:</label>
+                    <select type="text" id="typeGeneral" name="typeGeneral" class="form-inline" >
+                      <option>Packaging</option>
+                      <option>Heavy Lifting</option>
+                      <option>Sorting</option>
+                      <option>Sanitation</option>
+                      <option>Warehouse</option>
+                      <option>Assembly</option>
+                      <option>Production Line</option>
+                    </select>
+                    <label for="typeGeneralhistory" class="form-inline">Experience:</label>
+                    <input type="number" id="typeGeneralhistory" name="typeGeneralhistory" class="form-inline">
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="typeDriving">Driving: </label>
+                <select type="text" id="typeDriving" name="typeDriving">
+                  <option>G Driver</option>
+                  <option>G Driver with own car</option>
+                  <option>Sorting</option>
+                  <option>GZ Driver</option>
+                  <option>DZ Driver</option>
+                  <option>AZ Driver</option>
+                </select>
+                <label for="typeGeneralhistory">Experience:</label>
+                <input type="number" id="typeGeneralhistory" name="typeGeneralhistory">
+              </div>
+              <div>
+                <label for="typeForklift">Forklift: </label>
+                <select type="text" id="typeForklift" name="typeForklift"></select>
+                <label for="typeGeneralhistory">Experience:</label>
+                <input type="number" id="typeGeneralhistory" name="typeGeneralhistory">
+              </div>
+              <div>
+                <label for="typeWalkie">Walkie Operator: </label>
+                <input type="text" id="typeWalkie" name="typeWalkie">
+                <label for="typeGeneralhistory">Experience:</label>
+                <input type="number" id="typeGeneralhistory" name="typeGeneralhistory">
+              </div>
+              <div>
+                <label for="typeWelder">Welder:</label>
+                <select type="text" id="typeWelder" name="typeWelder">
+                  <option>Tig Welder</option>
+                  <option>Mig Welder</option>
+                  <option>Ro Welder</option>
+                  <option>Gas Welder</option>
+                </select>
+                <label for="typeGeneralhistory">Experience:</label>
+                <input type="number" id="typeGeneralhistory" name="typeGeneralhistory">
+              </div>
+              <div>
+                <label for="typeCNC">CNC Operator: </label>
+                <select type="text" id="typeCNC" name="typeCNC">
+                  <option>Lathe Machine Operator</option>
+                  <option>Milling Machine Operator</option>
+                  <option>Laser Machine Operator</option>
+                  <option>Plasma Cutting Machine</option>
+                  <label for="typeGeneralhistory">Experience:</label>
+                  <input type="number" id="typeGeneralhistory" name="typeGeneralhistory">
+              </div>
+              <div>
+                <label for="typeWarehouse">Warehouse: </label>
+                <select type="text" id="typeWarehouse" name="typeWarehouse">
+                  <option>Warehouse Supervisor</option>
+                  <option>Shipping/Receiving</option>
+                </select>
+                <label for="typeGeneralhistory">Experience:</label>
+                <input type="number" id="typeGeneralhistory" name="typeGeneralhistory" />
+              </div>
+              <div>
+                <label for="typeOffice">Office: </label>
+                <select type="text" id="typeOffice" name="typeOffice">
+                  <option>Office Admin</option>
+                  <option>Receptionist</option>
+                  <option>Call Center Executive</option>
+                  <option>Book Keeper</option>
+                  <option>Payroll Assistant</option>
+                </select>
+                <label for="typeOfficehistory">Experience:</label>
+                <input type="text" id="typeOfficehistory" name="typeOfficehistory" />
+              </div>
+              <div>
+                <label for="id_doc">Identification Card:</label>
+                <input type="file" id="id_doc" name="id_doc" accept=".pdf,.jpg,.jpeg">
+              </div>
+              <div>
+                <label for="profile_doc">Resume/Curriculum Vitae:</label>
+                <input type="file" id="profile_doc" name="cv_doc" accept=".jpg,.pdf,.jpeg">
+              </div>
+            </div>
+            <input type="submit" value="Send" />
+          </div>
+        </section>
+      </div>
+  </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Colorlib Templates">
+        <meta name="author" content="Colorlib">
+        <meta name="keywords" content="Colorlib Templates">
+
+        <!-- Title Page-->
+        <title>User Profile</title>
+
+        <!-- Font special for pages-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+        <!-- Main CSS-->
+        <link href="{{ url_for('static', filename='css/demo.css') }}" rel="stylesheet" >
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='vendor/fonts/boxicons.css') }}" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='vendor/css/core.css') }}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+  <!-- <link rel="stylesheet" href="{{ url_for( 'static', filename='css/demo.css') }}" /> -->
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="{{ url_for('static' , filename='vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+
+  <!-- Page CSS -->
+
+  <!-- Helpers -->
+  <script src="{{ url_for('static', filename='vendor/js/helpers.js') }}"></script>
+
+  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+  <script src="{{ url_for('static',filename='js/config.js') }}"></script>
+  <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+      
+</head>
+
+    <body>
+        <div class="page-wrapper bg-dark p-t-100 p-b-50">
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+        
+                    <div class="card-heading" style="background-color: #d3d3d354;display: flex;justify-content: space-between;">
+                        <div class="col-8" >
+                            <h2 class="title" style="color: #e86240;margin: 9px 16%;width: fit-content; padding-left: 8%;">Users Profile</h2>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <a href="/" >Go to home page</a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 15px 15%;background: linear-gradient(342deg, white, #00000024,#f4f4f4);">
+                        <form id="form1" action = "/editsavedata" method="POST"
+                        enctype = "multipart/form-data">            
+                            <div class="col-xl">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Personal Information</h5>
+                                <!-- <small class="text-muted float-end">Merged input group</small> -->
+                                </div>
+                                <div class="card-body">
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="fullname">Full Name</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-user"></i></span>
+                                    <input type="text" class="form-control" id="fullname"
+                                        placeholder="Name" aria-label="fullname" name="fullname"
+                                        aria-describedby="fullname" value="{{ data[0][1] if data[0][1]!='' and data[0][1]!=none }}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="address">Address</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                        class="bx bx-comment"></i></span>
+                                    <textarea id="address" name="address" class="form-control"
+                                        placeholder="Address"
+                                        aria-label="Address"
+                                        aria-describedby="Address" >{{ data[0][2] if data[0][2]!='' and data[0][2]!=none }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Email</label>
+                                    <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    <input type="text" id="email" class="form-control" placeholder="email@example.com"
+                                        aria-label="email" name="email" aria-describedby="email" value="{{ data[0][4] if data[0][2]!='' and data[0][4]!=none }}" />
+                                    <!-- <span id="email" class="input-group-text">@example.com</span> -->
+                                    </div>
+                                    <div class="form-text">You can use letters, numbers & periods</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="login-phone">Login Phone No</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                                        <input readonly type="number" id="login-phone" name="login-phone" class="form-control phone-mask"
+                                            placeholder="658 799 8941" aria-label="658 799 8941"
+                                            aria-describedby="login-phone" value="+{{ data[0][0] }}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="phone">Alternate Phone No</label>
+                                    <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i
+                                        class="bx bx-phone"></i></span>
+                                    <input type="number" id="phone" name="phone" class="form-control phone-mask"
+                                        placeholder="658 799 8941" aria-label="658 799 8941"
+                                        aria-describedby="phone" value="{{ data[0][27] if data[0][27]!='' and data[0][27]!=none }}"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="dateOfBirth">DOB</label>
+                                    <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class='bx bx-calendar-event'></i></span>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control phone-mask"
+                                        placeholder="dd-mm-yy" aria-label="658 799 8941"
+                                        aria-describedby="date Of Birth" value="{{ data[0][3]  if data[0][3]!='' and data[0][3]!=none }}"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select id="gender" name="gender" class="form-select" aria-label="gender"
+                                    aria-describedby="gender">
+                                    <option value="male" {{ 'selected' if data[0][5] == 'male' and data[0][5] != ""}} >Male</option>
+                                    <option value="female" {{ 'selected' if data[0][5] == 'female' and data[0][5] != ""}}>Female</option>
+                                    <option value="other" {{ 'selected' if data[0][5] == 'other' and data[0][5] != ""}}>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="language" class="form-label">Preferred Language</label>
+                                    <select id="language" class="form-select"  name="language">
+                                    <option {{ 'selected' if data[0][6] == 'English' and data[0][6] != ""}} >English</option>
+                                    <option {{ 'selected' if data[0][6] == 'French' and data[0][6] != ""}}>French</option>
+                                    <option {{ 'selected' if data[0][6] == 'Spanish' and data[0][6] != ""}}>Spanish</option>
+                                    <option {{ 'selected' if data[0][6] == 'Vietnamese' and data[0][6] != ""}}>Vietnamese</option>
+                                    <option {{ 'selected' if data[0][6] == 'Mandarin' and data[0][6] != ""}}>Mandarin</option>
+                                    <option {{ 'selected' if data[0][6] == 'Cantonese' and data[0][6] != ""}}>Cantonese</option>
+                                    <option {{ 'selected' if data[0][6] == 'Filipino' and data[0][6] != ""}}>Filipino</option>
+                                    <option {{ 'selected' if data[0][6] == 'Telugu' and data[0][6] != ""}}>Telugu</option>
+                                    <option {{ 'selected' if data[0][6] == 'Hindi' and data[0][6] != ""}}>Hindi</option>
+                                    <option {{ 'selected' if data[0][6] == 'Punjabi' and data[0][6] != ""}}>Punjabi</option>
+                                    </select>
+                                </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Work Profile</h5>
+                                <small class="text-muted float-end"></small>
+                                </div>
+                                <div class="card-body">
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="employer_name">Name of the previous
+                                    employer</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-company2" class="input-group-text"><i
+                                        class="bx bx-buildings"></i></span>
+                                    
+                                    <input type="text" class="form-control" id="employer_name" name="employer_name"
+                                        placeholder="Employer Name" aria-label="Employer Name"
+                                        aria-describedby="employer_name" value="{{ data[0][7]  if data[0][7] != '' and data[0][7] != none}}"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="employeedYears">Years Of Work:</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="employeedYears" class="input-group-text"><i
+                                        class="bx bx-buildings"></i></span>
+                                    <input type="text" id="employeedYears"  name="employeedYears" class="form-control"
+                                        placeholder="" aria-label=""
+                                        aria-describedby="basic-icon-default-company2" value="{{ data[0][8]  if data[0][8] != '' and data[0][8] != none}}"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="employer_address">Address</label>
+                                    <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    <input type="text" id="employer_address"name="employer_address" class="form-control"
+                                        placeholder="Employer Address" aria-label="ACME Inc."
+                                        aria-describedby="basic-icon-default-company2" value="{{ data[0][9]  if data[0][9] != '' and data[0][9] != none}}"/>
+                                    <!-- <span id="basic-icon-default-email2" class="input-group-text">@example.com</span> -->
+                                    </div>
+                                    <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
+                                </div>
+                                <div class="mb-3" style="display:none; ">
+                                    <label class="form-label" for="employer_phone">Phone No</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-phone2" class="input-group-text"><i
+                                        class="bx bx-phone"></i></span>
+                                    <input type="text" id="employer_phone"name="employer_phone" class="form-control phone-mask"
+                                        placeholder="658 799 8941" aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="work_nature">Type Of Work</label>
+                                    <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-company2" class="input-group-text"><i
+                                        class="bx bx-buildings"></i></span>
+                                    <input type="text" id="work_nature" name="work_nature" class="form-control"
+                                        placeholder="Programmer" aria-label=""
+                                        aria-describedby="work_nature" value="{{ data[0][10]  if data[0][10] != '' and data[0][10] != none}}"/>
+                                    </div>
+                                </div>
+                                
+                                </div>
+
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Job candidate is looking for</h5>
+                                </div>
+                                <div class="card-body">
+
+                                                        <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">General Labour</label>
+                                    <select id="defaultSelect" name="typeGeneral" class="form-select">
+                                        <option {{ 'selected' if data[0][11] == 'Packaging' and data[0][11] != ""}}>Packaging</option>
+                                        <option {{ 'selected' if data[0][11] == 'Heavy Lifting' and data[0][11] != ""}}>Heavy Lifting</option>
+                                        <option {{ 'selected' if data[0][11] == 'Sorting' and data[0][11] != ""}}>Sorting</option>
+                                        <option {{ 'selected' if data[0][11] == 'Sanitation' and data[0][11] != ""}}>Sanitation</option>
+                                        <option {{ 'selected' if data[0][11] == 'Warehouse' and data[0][11] != ""}}>Warehouse</option>
+                                        <option {{ 'selected' if data[0][11] == 'Assembly' and data[0][11] != ""}}>Assembly</option>
+                                        <option {{ 'selected' if data[0][11] == 'Production Line' and data[0][11] != ""}}>Production Line</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{ data[0][12] if data[0][12] != '' and data[0][12] != none }}" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Driving</label>
+                                    <select id="defaultSelect" name="typeDriving" class="form-select">
+                                        <option {{ 'selected' if data[0][13] == 'G Driver' and data[0][13] != ""}}>G Driver</option>
+                                        <option {{ 'selected' if data[0][13] == 'G Driver with own car' and data[0][13] != ""}}>G Driver with own car</option>
+                                        <option {{ 'selected' if data[0][13] == 'Sorting' and data[0][13] != ""}}>Sorting</option>
+                                        <option {{ 'selected' if data[0][13] == 'GZ Driver' and data[0][13] != ""}}>GZ Driver</option>
+                                        <option {{ 'selected' if data[0][13] == 'DZ Driver' and data[0][13] != ""}}>DZ Driver</option>
+                                        <option {{ 'selected' if data[0][13] == 'AZ Driver' and data[0][13] != ""}}>AZ Driver</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory1" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{ data[0][14] if data[0][14] != '' and data[0][14] != none }}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Forklift</label>
+                                    <select id="defaultSelect" name="typeForklift" class="form-select">
+                                        <option {{ 'selected' if data[0][15] == 'other' and data[0][15] != ""}}>other</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistor2" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{ data[0][16] if data[0][16] != '' and data[0][16] != none }}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Subtitle</label>
+                                    <select id="defaultSelect" name="typeWalkie" class="form-select">
+                                        <option {{ 'selected' if data[0][17] == 'Walkie Operator' and data[0][17] != ""}}>Walkie Operator</option>
+                                        <option {{ 'selected' if data[0][17] == 'Raymond Reach Operator' and data[0][17] != ""}}>Raymond Reach Operator</option>
+                                        <option {{ 'selected' if data[0][17] == 'Counter Balance Propane' and data[0][17] != ""}}>Counter Balance Propane</option>
+                                        <option {{ 'selected' if data[0][17] == 'Counter Balance Electric' and data[0][17] != ""}}>Counter Balance Electric</option>
+                                        <option {{ 'selected' if data[0][17] == 'Order Picker' and data[0][17] != ""}}>Order Picker</option>
+                                        <option {{ 'selected' if data[0][17] == 'Pallet Picker' and data[0][17] != ""}}>Pallet Picker</option>
+                                    </select >
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory3" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{ data[0][18] if data[0][18] != '' and data[0][18] != none }}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Welder</label>
+                                    <select id="defaultSelect" name="typeWelder" class="form-select">
+                                        <option {{ 'selected' if data[0][19] == 'Tig Welder' and data[0][19] != ""}}>Tig Welder</option>
+                                        <option {{ 'selected' if data[0][19] == 'Mig Welder' and data[0][19] != ""}}>Mig Welder</option>
+                                        <option {{ 'selected' if data[0][19] == 'Ro Welder' and data[0][19] != ""}}>Ro Welder</option>
+                                        <option {{ 'selected' if data[0][19] == 'Gas Welder' and data[0][19] != ""}}>Gas Welder</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory4" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{ data[0][20] if data[0][20] != '' and data[0][20] != none }}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">CNC Operator</label>
+                                    <select id="defaultSelect" name="typeCNC" class="form-select">
+                                        <option {{ 'selected' if data[0][21] == 'Lathe Machine Operator' and data[0][21] != ""}}>Lathe Machine Operator</option>
+                                        <option {{ 'selected' if data[0][21] == 'Milling Machine Operator' and data[0][21] != ""}}>Milling Machine Operator</option>
+                                        <option {{ 'selected' if data[0][21] == 'Laser Machine Operator' and data[0][21] != ""}}>Laser Machine Operator</option>
+                                        <option {{ 'selected' if data[0][21] == 'Plasma Cutting Machine' and data[0][21] != ""}}>Plasma Cutting Machine</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory5" id="basic-icon-default-phone" class="form-control phone-mask"
+                                     placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{data[0][22] if data[0][22] != '' and data[0][22] != none}}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Warehouse</label>
+                                    <select id="defaultSelect" name="typeWarehouse" class="form-select">
+                                        <option {{ 'selected' if data[0][23] == 'Warehouse Supervisor' and data[0][23] != ""}}>Warehouse Supervisor</option>
+                                        <option {{ 'selected' if data[0][23] == 'Shipping/Receiving' and data[0][23] != ""}}>Shipping/Receiving</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeGeneralhistory6" id="basic-icon-default-phone" class="form-control phone-mask"
+                                    placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{data[0][24] if data[0][24] != '' and data[0][24] != none}}" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Office</label>
+                                    <select id="defaultSelect" name="typeOffice" class="form-select">
+                                        <option {{ 'selected' if data[0][25] == 'Office Admin' and data[0][25] != ""}}>Office Admin</option>
+                                        <option {{ 'selected' if data[0][25] == 'Receptionist' and data[0][25] != ""}}>Receptionist</option>
+                                        <option {{ 'selected' if data[0][25] == 'Call Center Executive' and data[0][25] != ""}}>Call Center Executive</option>
+                                        <option {{ 'selected' if data[0][25] == 'Book Keeper' and data[0][25] != ""}}>Book Keeper</option>
+                                        <option {{ 'selected' if data[0][25] == 'Payroll Assistant' and data[0][25] != ""}}>Payroll Assistant</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Experience</label>
+                                    <input type="number" name="typeOfficehistory7" id="basic-icon-default-phone" class="form-control phone-mask"
+                                        placeholder="eg: 0" min=0 aria-label="658 799 8941"
+                                        aria-describedby="basic-icon-default-phone2" value="{{data[0][26] if data[0][26] != '' and data[0][26] != none}}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-3">
+                                    <label for="defaultSelect" class="form-label">Preferred Location</label>
+                                    <select id="defaultSelect" name="Preferredlocation" class="form-select">
+                                        <option {{ 'selected' if data[0][28] == 'Location1' and data[0][28] != ""}}>Location1</option>
+                                        <option {{ 'selected' if data[0][28] == 'Location2' and data[0][28] != ""}}>Location2</option>
+                                        <option {{ 'selected' if data[0][28] == 'Location3' and data[0][28] != ""}}>Location3</option>
+                                        <option {{ 'selected' if data[0][28] == 'Location4' and data[0][28] != ""}}>Location4</option>
+                                        <option {{ 'selected' if data[0][28] == 'Location5' and data[0][28] != ""}}>Location5</option>
+                                        <option {{ 'selected' if data[0][28] == 'Location6' and data[0][28] != ""}}>Location6</option>
+                                    </select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-6">
+                                    <label for="defaultSelect" class="form-label">Identification Card</label>
+                                    <div class="input-group">
+                                        <input
+                                        type="file"
+                                        class="form-control"
+                                        id="inputGroupFile04"
+                                        name="id_doc"
+                                        aria-describedby="inputGroupFileAddon04"
+                                        aria-label="Upload"
+                                        accept=".pdf"
+                                        />
+                                        <!-- <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Button</button> -->
+                                    </div>
+                                    <a href="/download?ph={{data[0][0]}}&type=id" target="_blank">id.pdf</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-sm-6">
+                                    <label for="defaultSelect" class="form-label">Resume/Curriculum Vitae</label>
+                                    <div class="input-group">
+                                        <input
+                                        type="file"
+                                        class="form-control"
+                                        id="inputGroupFile043"
+                                        name="cv_doc"
+                                        aria-describedby="inputGroupFileAddon04"
+                                        aria-label="Upload"
+                                        accept=".pdf"
+                                        />
+                                        <!-- <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Button</button> -->
+                                    </div>
+                                     <a href="/download?ph={{data[0][0]}}&type=cv" target="_blank">cv.pdf</a>
+                                    </div>
+                                </div>
+                                <input type="number" id="ph_no" name="ph_no" class="form-control phone-mask"
+                                        placeholder="658 799 8941" aria-label="658 799 8941"
+                                        aria-describedby="phone" hidden value="{{ data[0][0] if data[0][0]!='' and data[0][0]!=none }}"/>
+                                </div>
+                                <button id="submitbtn" type="submit" class="btn btn-primary">Submit</button>
+                                <div id="editbtndiv">
+                                    <button id="editbtn" onclick="editclick()"  class="btn btn-primary">Edit</button>
+                                </div>
+                                <!-- <div id="homebtndiv">
+                                    
+          
+                                    <button id="hometbtn" onclick="window.location.href='/'"  class="btn btn-primary">home</button>
+                                </div> -->
+
+                            </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+            
+                </div>
+            </div>
+        </div>
+        
+        <!-- Jquery JS-->
+        <script>
+            function onloading() {
+                $('#form1').each(function(){$(this).attr('readonly',true)});
+                $('#form1 :input').prop('readonly',true);
+                $('select').attr('disabled',true);
+                $('#form1 :input').css('background-color','transparent');
+                $('#submitbtn').css('display','none');
+                $('#submitbtn').prop('diabled',true)
+                $("#inputGroupFile043").prop('disabled',true);
+                $("#inputGroupFile04").prop('disabled',true);
+                $('#editbtn').css({'background-color':'#e86240','border':'none','width':'100%'})
+            }
+            function editclick() {
+                $('#editbtndiv').css('display','none');
+                $('#editbtn').prop('disabled','true')
+                $('#form1').each(function(){$(this).attr('readonly',false)});
+                $('#form1 :input').prop('readonly',false);
+                $('select').attr('disabled',false);
+                $('#form1 :input').css('background-color','none');
+                $("#inputGroupFile043").prop('disabled',false);
+                $("#inputGroupFile04").prop('disabled',false);
+                $('#submitbtn').css({'display':'block','diabled':false,'background-color':'#e86240','border':'none'});
+                alert('Now you can edit the details');
+                // $('#submitbtn').css('display','block');
+                // $('#submitbtn').prop('diabled',false);
+                // $('#submitbtn').css('background-color','#e86240');
+
+            }
+            
+            onloading();
+         </script>
+
+        <!-- Main JS-->
+        <!-- <script src="{{url_for('static',filename='global.js')}}"></script> -->
+        
+    </body>
+
+</html>
+

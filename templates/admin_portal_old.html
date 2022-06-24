@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+
+  <h2 class="title" style="color: #e86240;margin: 9px 16%;"> Candidate Details </h2>
+
+  <div class="mb-3">
+    <label for="language" class="form-label">Preferred Language</label>
+    <select id="language" class="form-select" name="language">
+      <option>English</option>
+      <option>French</option>
+      <option>Spanish</option>
+      <option>Vietnamese</option>
+      <option>Mandarin</option>
+      <option>Cantonese</option>
+      <option>Filipino</option>
+      <option>Telugu</option>
+      <option>Hindi</option>
+      <option>Punjabi</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="job" class="form-label">Job Categories</label>
+    <select id="job" class="form-select" name="job" onChange="changecat(this.value);">
+      <option>----</option>
+      <option value="A">General labor</option>
+      <option value="B">Driving</option>
+      <option value="C">Forklift</option>
+      <option value="D">Welder</option>
+      <option value="E">CNC operator</option>
+      <option value="F">Warehouse</option>
+      <option value="G">Office</option>
+      <option value="H">Others</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="sjob" class="form-label">Job Sub-Categories</label>
+    <select id="sjob" class="form-select" name="sjob">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">Location</label>
+    <select id="location" class="form-select" name="location">
+      <option></option>
+    </select>
+  </div>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone no</th>
+      <th>Preferred Lang.</th>
+      <th colspan="3">Job candidate is looking for </th>
+
+    </tr>
+    {% for row in value %}
+    <tr>
+
+      <td>{{row[1]}}</td>
+      <td>{{row[2]}}</td>
+      <td>{{row[0]}}</td>
+      <td>{{row[6]}}</td>
+      
+
+    </tr>
+    {% endfor %}
+
+    <!-- <tr>
+    <td>John</td>
+    <td>USA</td>
+    <td>1234567890</td>
+    <td>English</td>
+    <td>Welder</td>
+  </tr> -->
+
+  </table>
+  <script>
+    var jobSUBCategory = {
+      A: ["Packaging", "Heavy Lifting", "Sorting", "Sanitation", "Warehouse", "Assembly", "Production Line"],
+      B: ["G Driver", "G Driver with own car", "Sorting", "GZ Driver", "DZ Driver", "AZ Driver"],
+      C: ["Forklift"],
+      D: ["Walkie Operator", "Raymond Reach Operator", "Counter Balance Propane", "Counter Balance Electric", "Order Picker", "Pallet Picker"],
+      E: ["Tig Welder", "Mig Welder", "Ro Welder", "Gas Welder"],
+      F: ["Lathe Machine Operator", "Milling Machine Operator", "Laser Machine Operator", "Plasma Cutting Machine"],
+      G: ["Warehouse Supervisor", "Shipping/Receiving"],
+      H: ["Office Admin", "Receptionist", "Call Center Executive", "Book Keeper", "Payroll Assistant"]
+
+    }
+
+    function changecat(value) {
+      if (value.length == 0) document.getElementById("sjob").innerHTML = "<option></option>";
+      else {
+        var categoryOptions = "";
+        for (categoryId in jobSUBCategory[value]) {
+          categoryOptions += "<option>" + jobSUBCategory[value][categoryId] + "</option>";
+        }
+        document.getElementById("sjob").innerHTML = categoryOptions;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

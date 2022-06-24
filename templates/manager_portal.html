@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    th.sp {
+      width: 30%;
+    }
+
+    td {
+      text-align: center;
+      background-color: rgb(240, 240, 240);
+    }
+
+    td.sp {
+      text-align: justify;
+      padding: 10px 20px;
+    }
+
+    /* td { 
+      text-align:justify;
+      padding: 0px 20px;
+    } */
+    tr:nth-child(even) {
+      background-color: #f3f1f1;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="{{ url_for('static', filename='css/demo.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='vendor/css/core.css') }}"
+    class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='vendor/css/theme-default.css') }}"
+    class="template-customizer-theme-css" />
+
+    
+</head>
+
+<body>
+
+
+
+
+
+  <h2 class="title" style="color: #e86240;margin: 9px 16%;"> Candidate Details </h2>
+
+  <div class="container">
+    <div class="row d-flex justify-content-center text-center">
+      <div class="col-3">
+        <label for="language" class="form-label">Preferred Language</label>
+        <select id="language" class="form-select" name="language">
+          <option selected>All</option>
+          <option>English</option>
+          <option>French</option>
+          <option>Spanish</option>
+          <option>Vietnamese</option>
+          <option>Mandarin</option>
+          <option>Cantonese</option>
+          <option>Filipino</option>
+          <option>Telugu</option>
+          <option>Hindi</option>
+          <option>Punjabi</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="job" class="form-label">Job Categories</label>
+        <select id="job" class="form-select" name="job" onChange="changecat(this.value);">
+          <option selected>All</option>
+          <option value="General labor">General labor</option>
+          <option value="Driving">Driving</option>
+          <option value="Forklift">Forklift</option>
+          <option value="Subtitle">Subtitle</option>
+          <option value="Welder">Welder</option>
+          <option value="CNC operator">CNC operator</option>
+          <option value="Warehouse">Warehouse</option>
+          <option value="Office">Office</option>
+        </select>
+      </div>
+
+      <div class="col-3">
+        <label for="sjob" class="form-label">Job Sub-Categories</label>
+        <select id="sjob" class="form-select" name="sjob">
+          <option></option>
+        </select>
+      </div>
+
+      <!-- <div class="col-3">
+            <label for="location" class="form-label">Location</label>
+            <select id="location" class="form-select" name="location">
+              <option></option>
+            </select>
+          </div> -->
+      <div class="" id="exp" style="display: none; margin-top: 25px;">
+        <label for="Experience" class="form-label">Experience</label>
+        <!-- <input  type="text" id="Experience" name="Experience"  placeholder="0" > -->
+        <input type="text" id="Experience" placeholder="0" name="Experience"
+          style="border-radius: 5px; border: 1px solid #d9dee3">
+        <!-- <select id="Experience" class="form-select" name="Experience">
+              <option></option>
+              <option>0-2</option>
+              <option>2-4</option>
+              <option>4-6</option>
+              <option>>6</option>
+            </select> -->
+      </div>
+    </div>
+  </div>
+  <button type="submit" onclick="getdata()" style="background-color: #e86240; margin-left: 40%; margin-top: 15px"
+    class="btn btn-primary">Submit</button>
+  <div class="col-3">
+    <input style="float: right;" type="text" id="locationfilter" onkeyup="myFunction()"
+      placeholder="search for location..">
+  </div>
+
+  <table id="recieved_data">
+
+    {% block content %}
+    <thead>
+      <tr>
+        <th>Name</th>
+        <!-- <th>Address</th> -->
+        <th>Phone no</th>
+        <th class="sp">Job candidate is looking for</th>
+        <th>Preferred Lang.</th>
+        <th>Experience</th>
+        <th>Location</th>
+        <th>Link to Profile</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% if value %}
+      {% for row in value %}
+      <tr>
+
+        <td>{{row[2]}}</td>
+        <!-- <td>{{row[3]}}</td> -->
+        <td>{{row[4]}}</td>
+        <td class="sp">{{row[6]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[0]}}</td>
+        <td>{{row[7]}}</td>
+        <td><a target="_blank" href="/exi?ph={{row[1]}}">view profile</a></td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr style="background-color: rgba(242, 242, 242, 0.985);text-align: center;">
+        <td colspan="6" style="text-align: center; vertical-align: middle;padding: 20px 0px;">No record Found.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+
+    {% endblock content %}
+
+
+    <!-- <tr>
+    <td>John</td>
+    <td>USA</td>
+    <td>1234567890</td>
+    <td>English</td>
+    <td>Welder</td>
+  </tr> -->
+
+  </table>
+  <script>
+    var jobSUBCategory = {
+      "General labor": ["All", "Packaging", "Heavy Lifting", "Sorting", "Sanitation", "Warehouse", "Assembly", "Production Line"],
+      "Driving": ["All", "G Driver", "G Driver with own car", "Sorting", "GZ Driver", "DZ Driver", "AZ Driver"],
+      "Forklift": ["All", "Forklift"],
+      "Subtitle": ["All", "Walkie Operator", "Raymond Reach Operator", "Counter Balance Propane", "Counter Balance Electric", "Order Picker", "Pallet Picker"],
+      "Welder": ["All", "Tig Welder", "Mig Welder", "Ro Welder", "Gas Welder"],
+      "CNC operator": ["All", "Lathe Machine Operator", "Milling Machine Operator", "Laser Machine Operator", "Plasma Cutting Machine"],
+      "Warehouse": ["All", "Warehouse Supervisor", "Shipping/Receiving"],
+      "Office": ["All", "Office Admin", "Receptionist", "Call Center Executive", "Book Keeper", "Payroll Assistant"]
+
+    }
+
+    function changecat(value) {
+      if (value.length == 0) document.getElementById("sjob").innerHTML = "<option></option>";
+      else {
+        var categoryOptions = "";
+        for (categoryId in jobSUBCategory[value]) {
+          categoryOptions += "<option>" + jobSUBCategory[value][categoryId] + "</option>";
+        }
+        document.getElementById("sjob").innerHTML = categoryOptions;
+      }
+    }
+  </script>
+  <script>
+    function getdata() {
+      var server_data =
+      {
+        "language": $('#language').val(),
+        "job": $('#job').val(),
+        "sjob": $('#sjob').val(),
+        // "location": $('#location').val(),
+        "Exp": $('#Experience').val()
+      };
+      $.ajax({
+        method: "POST",
+        url: "/getcusdata",
+        data: JSON.stringify(server_data),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 404) {
+            alert("At the moment server is down")
+          }
+          $("#recieved_data tbody").empty();
+          var data = data.data
+          if (data.length == 0) {
+            $("tbody").append(
+              `<tr style="background-color: rgba(242, 242, 242, 0.985);text-align: center;">
+              <td colspan="9" style="text-align: center; vertical-align: middle;padding: 20px 0px;">No record Found.</td>   
+            </tr>`
+            )
+          }
+          else {
+            $.each(data, function (key, value) {
+              $("tbody").append(
+                "<tr><td style='padding: 10px'>" + value[3] +  "</td><td>" + value[5] + "</td><td>" + value[7] + "</td><td>" + value[6] + "</td><td>" + value[0] + "</td><td>" + value[2] + "</td><td> <a target='_blank' href='/exi?ph=" + value[1] + "'>view profile</a>" + "</td></tr>"
+
+                // "<tr><td style='padding: 10px'>" + value[3] + "</td><td>" + value[4] + "</td><td>" + value[5] + "</td><td>" + value[7] + "</td><td>" + value[6] + "</td><td>" + value[0] + "</td><td>" + value[2] + "</td><td> <a target='_blank' href='/exi?ph=" + value[1] + "'>view profile</a>" + "</td></tr>"
+              )
+            })
+
+          }
+
+
+          // console.log('got it',data)
+        },
+        error: function (data) {
+          console.log("error")
+          // console.log(data)
+          alert(data.message);
+        }
+      })
+    }
+  </script>
+  <script>
+    const el = document.getElementById("sjob");
+    const inputEl = document.getElementById("exp");
+    el.addEventListener("change", function () {
+      console.log(this.value);
+      if (this.value === "All" || this.value.length == 0 || $('job').value == 'All') {
+        inputEl.style.display = "none";
+        // console.log("dddddd")
+      }
+      else {
+        inputEl.style.display = "block";
+      }
+    });
+  </script>
+
+  <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("locationfilter");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("recieved_data");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        console.log(input, filter)
+        td = tr[i].getElementsByTagName("td")[6];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>
